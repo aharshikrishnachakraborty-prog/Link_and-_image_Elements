@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Super Selector · Rajasthan Royals Auction Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:dark;--bg:#0B1230;--bg2:#151E4A;--bg3:#1d285f;--ink:#F6F1EC;--mute:#A9B0D6;--pink:#FF4FA3;--gold:#F2B84B;--ok:#5BD6A0;--line:#2a3677;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){color-scheme:light;--bg:#F6F1EC;--bg2:#fff;--bg3:#efe8f3;--ink:#0B1230;--mute:#4A5280;--pink:#C2175F;--gold:#B7791F;--ok:#0E8F5B;--line:#d8d4e6}}
+:root[data-theme="light"]{color-scheme:light;--bg:#F6F1EC;--bg2:#fff;--bg3:#efe8f3;--ink:#0B1230;--mute:#4A5280;--pink:#C2175F;--gold:#B7791F;--ok:#0E8F5B;--line:#d8d4e6}
+*{box-sizing:border-box}html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:'Inter',system-ui,sans-serif;font-size:15px;line-height:1.4}
+h1,h2,h3,.num{font-family:'Space Grotesk',system-ui,sans-serif;margin:0}
+.wrap{max-width:1280px;margin:0 auto;padding:20px}
+header{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;margin-bottom:18px}
+.brand h1{font-size:28px}.brand h1 span{color:var(--pink)}
+.brand p{margin:2px 0 0;color:var(--mute)}
+.pill{background:var(--gold);color:#0B1230;border-radius:99px;padding:6px 14px;font-weight:600;font-size:13px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin-bottom:16px}
+.kpi,.panel{background:var(--bg2);border:1px solid var(--line);border-radius:18px;padding:16px}
+.kpi{border-top:4px solid var(--pink)}
+.kpi small{color:var(--mute);display:block}
+.kpi .num{font-size:32px;font-weight:700;color:var(--pink)}
+.kpi.g{border-top-color:var(--gold)}.kpi.g .num{color:var(--gold)}
+.grid{display:grid;grid-template-columns:1.25fr 1fr;gap:16px}
+@media(max-width:900px){.grid{grid-template-columns:1fr}}
+.panel h2{font-size:18px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;gap:8px}
+.panel h2 small{font:400 12px Inter,sans-serif;color:var(--mute)}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px}
+select,button{background:var(--bg3);color:var(--ink);border:1px solid var(--line);border-radius:10px;padding:8px 10px;font:inherit;cursor:pointer}
+button.primary{background:var(--pink);color:#0B1230;border-color:var(--pink);font-weight:600}
+button:disabled{opacity:.45;cursor:not-allowed}
+.tw{overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:520px}
+th{text-align:left;color:var(--mute);font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.06em;padding:6px 8px;cursor:pointer;white-space:nowrap}
+td{padding:9px 8px;border-top:1px solid var(--line);white-space:nowrap}
+tr.r{cursor:pointer}tr.r:hover,tr.sel{background:var(--bg3)}
+.tag{font-size:11px;border-radius:99px;padding:2px 8px;background:var(--bg3);color:var(--mute)}
+.gem{background:var(--gold);color:#0B1230;font-weight:600}
+.bar{height:8px;border-radius:6px;background:var(--bg3);overflow:hidden}.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--pink),var(--gold));border-radius:6px;transition:width .5s}
+.card{display:flex;flex-direction:column;gap:10px}
+.big{display:flex;align-items:center;gap:14px}
+.ring{width:84px;height:84px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(var(--pink) calc(var(--p)*1%),var(--bg3) 0);transition:.5s}
+.ring b{width:64px;height:64px;border-radius:50%;background:var(--bg2);display:grid;place-items:center;font:700 24px 'Space Grotesk',sans-serif}
+.ph{display:grid;grid-template-columns:90px 1fr 32px;gap:8px;align-items:center;font-size:13px;color:var(--mute)}
+.why{background:var(--bg3);border-radius:12px;padding:10px 12px}
+.gaps{display:flex;flex-wrap:wrap;gap:6px}
+.gaps span{border-radius:99px;padding:4px 12px;font-size:13px;border:1px solid var(--line)}
+.gaps .need{border-color:var(--pink);color:var(--pink)}.gaps .done{background:var(--ok);color:#0B1230;border-color:var(--ok)}
+.squad{list-style:none;margin:8px 0 0;padding:0;display:flex;flex-direction:column;gap:6px}
+.squad li{display:flex;justify-content:space-between;background:var(--bg3);border-radius:10px;padding:8px 10px}
+.squad button{padding:0 8px;margin-left:8px}
+.note{color:var(--mute);font-size:12px;margin-top:14px;text-align:center}
+.msg{min-height:20px;font-size:13px;color:var(--gold)}
+svg text{fill:var(--mute);font-size:11px}
+.full{grid-column:1/-1}
+</style></head>
+<body><div class="wrap">
+<header>
+ <div class="brand"><h1>Super <span>Selector</span></h1><p>Rajasthan Royals · IPL auction war room · every pick has a number and a reason</p></div>
+ <span class="pill">Explainable · Budget-aware</span>
+</header>
+
+<div class="kpis">
+ <div class="kpi g"><small>Purse left (₹ cr)</small><div class="num" id="kPurse">27.05</div></div>
+ <div class="kpi"><small>Slots left</small><div class="num" id="kSlots">6</div></div>
+ <div class="kpi"><small>Overseas slots left</small><div class="num" id="kOs">3</div></div>
+ <div class="kpi g"><small>Players shortlisted</small><div class="num">350</div></div>
+ <div class="kpi"><small>Squad impact (sum)</small><div class="num" id="kImp">0</div></div>
+</div>
+
+<div class="grid">
+ <div class="panel">
+  <h2>Gem Finder · impact vs price <small>click a dot · gold = hidden gem</small></h2>
+  <svg id="sc" viewBox="0 0 600 320" width="100%" role="img" aria-label="Scatter plot of player impact score against price in crore rupees"></svg>
+ </div>
+
+ <div class="panel card">
+  <h2>Player card <small id="pcRole"></small></h2>
+  <div class="big"><div class="ring" id="ring"><b id="pcImp">–</b></div>
+   <div><h3 id="pcName">Select a player</h3><div id="pcTags"></div></div></div>
+  <div id="phases"></div>
+  <div class="why" id="why">Pick a player from the table or the chart to see why they rank where they do.</div>
+  <div class="why">Bid ceiling: <b id="ceil" style="color:var(--gold)">–</b> <span id="ceilNote" style="color:var(--mute)"></span></div>
+  <div class="msg" id="msg"></div>
+  <button class="primary" id="buy" disabled>Add to squad at ceiling</button>
+ </div>
+
+ <div class="panel">
+  <h2>Shortlist <small id="cnt"></small></h2>
+  <div class="gaps" id="roleChips" style="margin-bottom:10px"></div>
+  <div class="filters">
+   <select id="fRole"><option value="">All roles</option></select>
+   <select id="fOs"><option value="">Indian + overseas</option><option value="0">Indian only</option><option value="1">Overseas only</option></select>
+   <select id="fGem"><option value="">All players</option><option value="1">Hidden gems only</option></select>
+  </div>
+  <div class="tw"><table><thead><tr>
+   <th data-k="name">Player</th><th data-k="role">Role</th><th data-k="impact">Impact</th><th data-k="price">Price ₹cr</th><th data-k="gap">Value gap</th></tr></thead><tbody id="tb"></tbody></table></div>
+ </div>
+
+ <div class="panel">
+  <h2>Auction room <small>live budget + squad gaps</small></h2>
+  <div class="bar"><i id="purseBar" style="width:100%"></i></div>
+  <p style="color:var(--mute);margin:6px 0 12px">Purse used: <b id="used" style="color:var(--ink)">0.00</b> of 27.05 ₹ cr</p>
+  <div style="margin-bottom:6px;color:var(--mute)">Squad gaps</div><div class="gaps" id="gaps"></div>
+  <ul class="squad" id="squad"></ul>
+ </div>
+</div>
+<p class="note">Player names are from the shortlist. Impact scores, prices and phase ratings are illustrative placeholders to be replaced by the model output. Purse (₹27.05 cr left of a ₹157 cr cap), 6 slots, max 3 overseas and 350 shortlisted players (66 slots across 10 teams) come from the updated figures.</p>
+</div>
+
+<script>
+var PURSE=27.05,SLOTS=6,OS=3;
+var P=[
+{name:"Nehal Wadhera",role:"Finisher",os:0,impact:74,price:3.0,ph:[55,68,90],why:"Finisher profile: the model's death-over contribution will be explained here."},
+{name:"Ashutosh Sharma",role:"Finisher",os:0,impact:68,price:5.2,ph:[48,62,88],why:"Finisher profile: priced above modelled value, so the bid ceiling stays low."},
+{name:"Naman Dhir",role:"Finisher",os:0,impact:78,price:6.5,ph:[52,74,91],why:"Finisher profile: strong impact, but the asking price eats into value per rupee."},
+{name:"Angkrish Raghuvanshi",role:"Opener",os:0,impact:80,price:5.5,ph:[90,70,45],why:"Opener profile: powerplay scoring impact will be explained here."},
+{name:"Sameer Rizvi",role:"Finisher",os:0,impact:72,price:2.4,ph:[50,70,89],why:"Finisher profile: modelled value is well above price, flagged as a hidden gem."},
+{name:"Shaik Rasheed",role:"Opener",os:0,impact:66,price:1.1,ph:[82,64,40],why:"Opener profile: low price against modelled powerplay value."},
+{name:"Musheer Khan",role:"All-rounder",os:0,impact:70,price:2.8,ph:[54,76,66],why:"All-rounder profile: bat and ball balance for squad fit, explained by the model."},
+{name:"Nishant Sindhu",role:"All-rounder",os:0,impact:62,price:4.0,ph:[50,68,62],why:"All-rounder profile: flexible role cover at a mid-range price."},
+{name:"Abishek Porel",role:"Wicketkeeper",os:0,impact:76,price:6.0,ph:[62,74,60],why:"Wicketkeeper profile: fills the keeper slot, priced close to modelled value."},
+{name:"Priyansh Arya",role:"Opener",os:0,impact:82,price:7.5,ph:[92,68,40],why:"Opener profile: high impact, but a high price lowers value per rupee."},
+{name:"Ayush Mhatre",role:"Opener",os:0,impact:84,price:8.0,ph:[94,72,42],why:"Opener profile: top impact in the shortlist, price limits the bid ceiling."}];
+P.forEach(function(p,i){p.id=i;p.val=+(p.impact*0.09).toFixed(2);p.gap=+(p.val-p.price).toFixed(2);p.gem=p.gap>=1.5&&p.price<5});
+var NEED=["Opener","Finisher","All-rounder","Wicketkeeper"];
+var squad=[],sel=null,sortK="impact",asc=false;
+var $=function(i){return document.getElementById(i)};
+var spent=function(){return squad.reduce(function(a,p){return a+p.paid},0)};
+var left=function(){return PURSE-spent()};
+var osUsed=function(){return squad.filter(function(p){return p.os}).length};
+function ceiling(p){return Math.max(0,Math.min(left(),+(p.val*0.95).toFixed(2)))}
+function fill(){var r=[...new Set(P.map(function(p){return p.role}))];$("fRole").innerHTML+=r.map(function(x){return"<option>"+x+"</option>"}).join("")}
+function list(){
+ var r=$("fRole").value,o=$("fOs").value,g=$("fGem").value;
+ var a=P.filter(function(p){return(!r||p.role==r)&&(o===""||p.os==o)&&(!g||p.gem)});
+ a.sort(function(x,y){var u=x[sortK],v=y[sortK];var c=typeof u=="string"?u.localeCompare(v):u-v;return asc?c:-c});
+ $("roleChips").innerHTML=["All"].concat(NEED).map(function(x){var v=x=="All"?"":x;var n=v?P.filter(function(p){return p.role==v}).length:P.length;return'<span data-r="'+v+'" class="'+(r==v?"done":"")+'" style="cursor:pointer">'+x+' · '+n+'</span>'}).join("");
+ $("cnt").textContent=a.length+" of "+P.length+" players";
+ $("tb").innerHTML=a.map(function(p){var inS=squad.some(function(s){return s.id==p.id});
+  return'<tr class="r'+(sel&&sel.id==p.id?" sel":"")+'" data-i="'+p.id+'"><td>'+p.name+(p.gem?' <span class="tag gem">💎 gem</span>':'')+(p.os?' <span class="tag">OS</span>':'')+(inS?' ✅':'')+'</td><td>'+p.role+'</td><td><b>'+p.impact+'</b></td><td>'+p.price.toFixed(1)+'</td><td style="color:'+(p.gap>0?'var(--ok)':'var(--pink)')+'">'+(p.gap>0?'+':'')+p.gap.toFixed(1)+'</td></tr>'}).join("");
+ chart(a)}
+function chart(a){
+ var W=600,H=320,L=44,B=34,T=14,R=14,X=function(v){return L+v/12*(W-L-R)},Y=function(v){return H-B-(v-55)/40*(H-B-T)};
+ var s='<rect x="'+L+'" y="'+T+'" width="'+(W-L-R)+'" height="'+(H-B-T)+'" fill="none" stroke="var(--line)"/>';
+ [60,70,80,90].forEach(function(v){s+='<line x1="'+L+'" x2="'+(W-R)+'" y1="'+Y(v)+'" y2="'+Y(v)+'" stroke="var(--line)" stroke-dasharray="3 4"/><text x="10" y="'+(Y(v)+4)+'">'+v+'</text>'});
+ [0,3,6,9,12].forEach(function(v){s+='<text x="'+(X(v)-4)+'" y="'+(H-14)+'">'+v+'</text>'});
+ s+='<text x="'+(W/2-40)+'" y="'+(H-1)+'">Price (₹ cr) →</text><text x="2" y="10">Impact</text>';
+  s+='<text x="'+(L+10)+'" y="'+(T+16)+'" style="fill:var(--gold);font-weight:600">★ High impact, low price</text>';
+ a.forEach(function(p,i){var c=p.gem?"var(--gold)":"var(--pink)";var on=sel&&sel.id==p.id;
+  s+='<g data-i="'+p.id+'" style="cursor:pointer"><circle cx="'+X(p.price)+'" cy="'+Y(p.impact)+'" r="'+(on?11:7)+'" fill="'+c+'" fill-opacity=".85" stroke="'+(on?"var(--ink)":"none")+'" stroke-width="2"><animate attributeName="r" from="0" to="'+(on?11:7)+'" dur=".5s" begin="0s"/></circle><text x="'+(X(p.price)+10)+'" y="'+(Y(p.impact)+4)+'">'+p.name.split(' ')[0]+'</text></g>'});
+ $("sc").innerHTML=s}
+function card(){
+ var p=sel;if(!p)return;
+ $("pcName").textContent=p.name;$("pcRole").textContent=p.role;$("pcImp").textContent=p.impact;
+ $("ring").style.setProperty("--p",p.impact);
+ $("pcTags").innerHTML='<span class="tag">'+(p.os?"Overseas":"Indian")+'</span> '+(p.gem?'<span class="tag gem">💎 Hidden gem</span>':'<span class="tag">Priced near value</span>');
+ var n=["Powerplay","Middle","Death"];
+ $("phases").innerHTML=p.ph.map(function(v,i){return'<div class="ph"><span>'+n[i]+'</span><div class="bar"><i style="width:'+v+'%"></i></div><b style="color:var(--ink)">'+v+'</b></div>'}).join("");
+ $("why").innerHTML="<b>Why:</b> "+p.why;
+ var c=ceiling(p);$("ceil").textContent="₹"+c.toFixed(2)+" cr";
+ $("ceilNote").textContent=" (value ₹"+p.val.toFixed(2)+" cr, asking ₹"+p.price.toFixed(1)+" cr)";
+ var inS=squad.some(function(s){return s.id==p.id});
+ var why="";if(inS)why="Already in squad.";else if(SLOTS-squad.length<=0)why="No slots left.";else if(p.os&&osUsed()>=OS)why="Overseas slot already used.";else if(p.price>left())why="Price is above the purse left.";
+ $("msg").textContent=why;$("buy").disabled=!!why}
+function room(){
+ var u=spent();$("used").textContent=u.toFixed(2);$("purseBar").style.width=Math.max(0,left()/PURSE*100)+"%";
+ $("kPurse").textContent=left().toFixed(2);$("kSlots").textContent=SLOTS-squad.length;$("kOs").textContent=OS-osUsed();
+ $("kImp").textContent=squad.reduce(function(a,p){return a+p.impact},0);
+ $("gaps").innerHTML=NEED.map(function(r){var d=squad.some(function(p){return p.role==r});return'<span class="'+(d?"done":"need")+'">'+(d?"✓ ":"")+r+'</span>'}).join("");
+ $("squad").innerHTML=squad.length?squad.map(function(p){return'<li><span>'+p.name+' · '+p.role+'</span><span>₹'+p.paid.toFixed(2)+' cr<button data-r="'+p.id+'" title="Remove">✕</button></span></li>'}).join(""):'<li style="color:var(--mute)">No picks yet. Add players at their bid ceiling.</li>'}
+function all(){list();card();room()}
+$("tb").onclick=function(e){var t=e.target.closest("tr");if(t){sel=P[+t.dataset.i];all()}};
+$("sc").onclick=function(e){var t=e.target.closest("g");if(t){sel=P[+t.dataset.i];all()}};
+document.querySelector("thead").onclick=function(e){var k=e.target.dataset.k;if(!k)return;asc=(k==sortK)?!asc:false;sortK=k;list()};
+["fRole","fOs","fGem"].forEach(function(i){$(i).onchange=list});
+$("buy").onclick=function(){if(!sel)return;var c=Math.min(ceiling(sel),left());sel.paid=c;squad.push(Object.assign({},sel));all()};
+$("squad").onclick=function(e){var r=e.target.dataset.r;if(r===undefined)return;squad=squad.filter(function(p){return p.id!=r});all()};
+$("roleChips").onclick=function(e){var t=e.target.closest("span");if(t){$("fRole").value=t.dataset.r;list()}};
+fill();sel=P[0];all();
+</script></body></html>

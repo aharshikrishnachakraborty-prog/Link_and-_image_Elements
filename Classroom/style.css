@@ -1,0 +1,19 @@
+h1{
+   color:pink;
+    
+}
+p{
+    color:blue;
+}
+button{
+    background-color:green;
+    color:tomato;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: underline;
+    cursor: pointer;
+}
+body{
+    background-color:purple
+}
